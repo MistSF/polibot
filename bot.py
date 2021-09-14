@@ -16,13 +16,14 @@ def __main__(reply) :
                 try :
                     api.get_status(mentions.in_reply_to_status_id).text # On vérifie qu'il y ai un tweet parent
                     valret = reply_to_mention(mentions, api)
-                    reply_id = reply.insert_one(valret)
-                    print(reply_id)
+                    if valret :
+                        reply_id = reply.insert_one(valret)
                 except :
                     print("Aucun tweet parent trouvé")
                     reply_id = reply.insert_one({
                         "id_str" : mentions.id_str,
-                        "mentionner": mentions.user.screen_name
+                        "mentionner": mentions.user.screen_name,
+                        "parents": False 
                     })
                 print(reply_id)
         sleep(60)

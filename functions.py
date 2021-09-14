@@ -20,7 +20,7 @@ def reply_to_mention(mention, api) :
     }
     try :
         api.update_status(
-            status= text,
+            status= reply,
             in_reply_to_status_id = id
         )
         return valret
